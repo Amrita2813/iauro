@@ -1,0 +1,7 @@
+<div class="main-container">
+<app-student-form (updatedData)="updatedStudentDetails($event)"></app-student-form>
+<div class="table-container" *ngIf="studentTableData.length;">
+  <h2 class="sub-heading">Student Details</h2>
+  <app-student-table (editStudentEvent)="editStudent($event)" [studentDetails]="studentTableData" (deleteStudentRecordEvent)="deleteStudentRecord($event)"></app-student-table>
+</div>
+</div>

@@ -1,0 +1,66 @@
+<form action="" class="form-container" [formGroup]="studentForm" #studentFormRef >
+  <h1>Submit Your Details</h1>
+  <div class="form-fields">
+    <mat-label>First Name</mat-label>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Amrita" class="input-field" formControlName="firstName">
+    </mat-form-field>
+  </div>
+
+  <div class="form-fields">
+    <mat-label>Last Name</mat-label>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Kaur" class="input-field" formControlName="lastName">
+    </mat-form-field>
+  </div>
+
+  <div class="form-fields">
+    <mat-label>Gender</mat-label>
+    <mat-radio-group formControlName="gender">
+      <mat-radio-button value="Male">Male</mat-radio-button>
+      <mat-radio-button value="Female">Female</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="form-fields">
+    <mat-checkbox formControlName="termsConditions">Accept Terms and Conditions</mat-checkbox>
+  </div>
+
+  <div class="form-fields">
+    <mat-label>Grade</mat-label>
+    <mat-form-field>
+      <mat-select formControlName="grade">
+        @for (grade of grades; track $index) {
+        <mat-option [value]="grade">{{grade}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+
+  <div class="form-fields">
+    <mat-label>
+      Favorite Subject
+    </mat-label>
+    <mat-form-field>
+      <input type="text" placeholder="select or search" matInput [matAutocomplete]="auto"
+       formControlName="subject">
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (option of filteredSubjects | async; track option) {
+        <mat-option [value]="option">{{option}}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="form-fields">
+    <mat-label>Additional Comments</mat-label>
+    <textarea name="" id="" rows="3" formControlName="comments"></textarea>
+  </div>
+
+  <section>
+    <button mat-flat-button (click)="submitStudentForm()" [disabled]="!studentForm.valid">{{isEdit ? 'Update':'Submit'}}</button>
+  </section>
+
+</form>
